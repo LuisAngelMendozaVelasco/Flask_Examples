@@ -1,0 +1,21 @@
+<form action="{{ '/update/' ~ contact.id if request.path.startswith('/update') else '/create' }}" method="POST" class="card mx-auto mt-4 border-light", style="max-width: 30rem;">
+    <fieldset class="card-body">
+        <legend class="card-title">Contact information</legend>
+        <div>
+            <label for="fullname" class="form-label mt-4">Full name</label>
+            <input type="text" class="form-control" id="fullname" name="fullname" 
+            placeholder="Enter full name" value="{{ contact.fullname if request.path.startswith('/update') else '' }}">
+        </div>
+        <div>
+            <label for="email" class="form-label mt-4">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" 
+            placeholder="Enter email address" value="{{ contact.email if request.path.startswith('/update') else '' }}">
+        </div>
+        <div>
+            <label for="phone" class="form-label mt-4">Phone number</label>
+            <input type="phone" class="form-control" id="phone" name="phone" 
+            placeholder="Enter phone number" value="{{ contact.phone if request.path.startswith('/update') else '' }}">
+        </div>
+        <button type="submit" class="btn btn-primary mt-4">{{ 'Update' if request.path.startswith('/update') else 'Save' }}</button>
+    </fieldset>
+</form>

@@ -1,0 +1,26 @@
+services:
+  # https://hub.docker.com/_/mariadb#-via-docker-compose
+  db:
+    image: mariadb:lts
+    container_name: db
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+
+  app:
+    image: flask-mariadb
+    build: .
+    container_name: app
+    volumes:
+      - .:/flask-app
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+    restart: unless-stopped
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+    command: ["python", "run.py", "--host=0.0.0.0"]
