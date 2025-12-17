@@ -1,0 +1,28 @@
+services:
+  # https://hub.docker.com/_/postgres#-via-docker-compose
+  db:
+    image: postgres
+    container_name: db
+    restart: unless-stopped
+    # set shared memory limit when using docker compose
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+  app:
+    image: flask-postgres
+    build: .
+    container_name: app
+    volumes:
+      - .:/flask-app
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+    restart: unless-stopped
+    environment:
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+    command: ["python", "run.py", "--host=0.0.0.0"]

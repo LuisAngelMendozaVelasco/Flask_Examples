@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="mt-4 mx-4">
+    <h1 class="text-center title">Users</h1>
+    <table class="table table-hover mx-auto">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">ID</th>
+                <th scope="col">Full name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Password hash</th>
+                <th scope="col">Registration date</th>
+                <th scope="col">Last modification date</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr class="table-dark">
+                <th scope="row">{{ user.id }}</th>
+                <td>{{ user.fullname }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.password[:20] + "..." }}</td>
+                <td>{{ user.registration.strftime('%Y-%m-%d %H:%M:%S %z') }}</td>
+                <td>{{ user.modification.strftime('%Y-%m-%d %H:%M:%S %z') if user.modification is not none else user.modification }}</td>
+                <td>
+                    <form action="{{ url_for('main.update', id=user.id) }}" method="GET" class="d-inline">
+                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                    </form>
+                    <form action="{{ url_for('main.delete', id=user.id) }}" method="POST" class="d-inline"
+                        onsubmit="return confirm('Are you sure you want to delete this contact?');">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
