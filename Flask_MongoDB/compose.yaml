@@ -1,0 +1,46 @@
+services:
+  # https://hub.docker.com/_/mongo#-via-docker-compose
+  mongo:
+    image: mongo:noble
+    container_name: flask-mongodb-db
+    volumes:
+      - ./api/instance/db:/var/lib/mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+
+  api:
+    image: flask-mongodb
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: flask-mongodb-api
+    volumes:
+      - ./api:/flask-api
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    restart: unless-stopped
+    environment:
+      DB_HOST: mongo
+      DB_USER: root
+      DB_PORT: 27017
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+
+  app:
+    image: react-mongodb
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: react-mongodb-app
+    volumes:
+      - ./app:/react-app
+      - /react-app/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+    restart: unless-stopped
