@@ -31,5 +31,5 @@ docker compose up
 
 ## References
 
-https://youtu.be/BP3D03CYFHA?si=XMDqMNxPBqCqCdkX
-https://github.com/FaztWeb/flask-sqlalchemy-crud
+- https://youtu.be/BP3D03CYFHA?si=XMDqMNxPBqCqCdkX
+- https://github.com/FaztWeb/flask-sqlalchemy-crud

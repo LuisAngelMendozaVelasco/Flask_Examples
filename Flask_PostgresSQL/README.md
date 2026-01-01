@@ -31,5 +31,5 @@ docker compose up
 
 ## References
 
-https://youtu.be/Qqgry8mezC8?si=jx-kHzJ179iMkeqX
-https://github.com/FaztWeb/flask-postgres-crud-spa
+- https://youtu.be/Qqgry8mezC8?si=jx-kHzJ179iMkeqX
+- https://github.com/FaztWeb/flask-postgres-crud-spa
