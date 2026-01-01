@@ -4,18 +4,17 @@ This is a simple Flask application that uses SQLite as its database.
 
 ## Running locally
 
-```python
+```bash
 pip install pipenv
 pipenv shell
 pipenv install
-python app.py
+python run.py
 ```
 
 ### Using Docker
 
-```docker
-docker build -t flask-sqlite .
-docker run -v .:/flask-app -p 5000:5000 flask-sqlite
+```bash
+docker compose up
 ```
 
 ## References

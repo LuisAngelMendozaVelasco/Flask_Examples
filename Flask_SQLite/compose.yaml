@@ -1,0 +1,10 @@
+services:
+  app:
+    container_name: flask-sqlite
+    build:
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - .:/flask-app
+    ports:
+      - "5000:5000"

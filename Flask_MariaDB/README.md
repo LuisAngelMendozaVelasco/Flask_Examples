@@ -6,7 +6,7 @@ This is a simple Flask application that uses MariaDB as its database.
 
 Create a `.env` file in the root directory of the project with the following content:
 
-```
+```bash
 DB_USER=CHANGE_ME
 DB_PASSWORD=CHANGE_ME
 DB_HOST=CHANGE_ME
@@ -16,16 +16,16 @@ DB_DATABASE=CHANGE_ME
 
 ## Running locally
 
-```python
+```bash
 pip install pipenv
 pipenv shell
 pipenv install
-python app.py
+python run.py
 ```
 
 ### Using Docker
 
-```docker
+```bash
 docker compose up
 ```
 

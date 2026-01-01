@@ -28,4 +28,4 @@ USER flaskuser
 EXPOSE 5000
 
 # Run run.py when the container launches
-CMD ["python", "run.py", "--host=0.0.0.0"]
+CMD ["python", "run.py"]

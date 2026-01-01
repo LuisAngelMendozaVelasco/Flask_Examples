@@ -1,16 +1,19 @@
 services:
   # https://hub.docker.com/_/mariadb#-via-docker-compose
   db:
-    image: mariadb:lts
-    container_name: db
+    image: mariadb:lts-noble
+    container_name: flask-mariadb-db
+    volumes:
+      - ./instance/db:/var/lib/mysql
     restart: unless-stopped
     environment:
       MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
 
   app:
     image: flask-mariadb
-    build: .
-    container_name: app
+    build:
+      dockerfile: Dockerfile
+    container_name: flask-mariadb-app
     volumes:
       - .:/flask-app
     ports:
@@ -21,6 +24,6 @@ services:
     environment:
       DB_HOST: db
       DB_USER: root
+      DB_PORT: 3306
       DB_PASSWORD: ${DB_PASSWORD}
       DB_DATABASE: ${DB_DATABASE}
-    command: ["python", "run.py", "--host=0.0.0.0"]
